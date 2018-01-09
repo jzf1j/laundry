@@ -1,0 +1,44 @@
+<% include ../partials/header_manager %>
+
+    <div class="container">
+      <h1>User list</h1>
+          <a class="btn btn-secondary" href="/manager_penel/users/add" role="button">Add User</a>
+      
+          <!-- <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-primary" disabled>role type:</button>
+              <a class="btn btn-secondary" href="/manager_penel/users/" role="button">admin</a>
+              <a class="btn btn-secondary" href="#" role="button">editor</a>
+              <a class="btn btn-secondary" href="#" role="button">author</a>
+              <a class="btn btn-secondary" href="#" role="button">contributor</a>
+              <a class="btn btn-secondary" href="/manager_penel/users/" role="button">subscriber</a>
+          </div> -->
+            
+        
+                      </p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td><b>email</b></td>
+            <td><b>Name</b></td>
+            <td><b>role</b></td>
+            <td><b>JDate</b></td>
+            <td colspan="2"><b>Action</b></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < itms.length; i++) { %>
+          <tr>
+            <td><%= itms[i].username %></td>
+            <td><%= itms[i].displayName %></td>
+            <td><%= itms[i].role %></td>
+            <td><%= itms[i].user_joined_date.toDateString() %></td>
+            
+            <td><a href="/manager_penel/users/edit/<%= itms[i]._id %>" class="btn btn-primary">Edit</a></td>
+            <td><a href="/manager_penel/users/delete/<%= itms[i]._id %>" class="btn btn-danger">Delete</a></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <% include ../partials/footer %>

@@ -1,0 +1,100 @@
+<% include ../partials/header_manager %>
+<div class="container">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/admin">admin</a></li>
+    <li class="breadcrumb-item"><a href="/admin/posts">posts</a></li>
+    <li class="breadcrumb-item active">Edit post</li>
+</ol>
+<form method="post" action="/manager_penel/orders/update/<%= item._id %>"> 
+<div class="row">
+<div class="col-sm-8">
+    
+        <h1>edit order</h1>
+        <div class="form-group">
+        <label for="item">order_products</label>
+        <select class="form-control" required name="order_products" id="order_products">
+                <option value="">select yours</option>
+                <% for(var i=0; i < itms_products.length; i++) { %>
+                <option  value="<%= itms_products[i]._id %>"  data-price="<%= itms_products[i].product_price %>" 
+                    <% if(itms_products[i]._id.equals(item.order_products[0]._id)) { %> selected="selected" <% } %>>
+                  <%= itms_products[i].product_name %> - $<%= itms_products[i].product_price %></option>
+                <% } %>
+        </select>
+        </div>      
+
+        <div class="form-group">
+            <label for="item">order_title</label>
+            <input type="text" class="form-control" id="item" name="order_title" value="<%= item.order_title %>">
+        </div>
+
+        <div class="form-group">
+                <label for="item">order_phone</label>
+                <input type="text" class="form-control" id="item" name="order_phone" value="<%= item.order_phone %>">
+            </div>
+            <hr class="bg-danger  text-white"/> 
+        <div class="form-group">
+                <label for="item">order_pickup_date</label>
+                <input type="text" class="form-control" id="item" name="order_pickup_date" value="<%= item.order_pickup_date %>">
+            </div>
+
+        <div class="form-group">
+                <label for="item">order_pickup_time</label>
+                <input type="text" class="form-control" id="item" name="order_pickup_time" value="<%= item.order_pickup_time %>">
+            </div>
+        <hr class="bg-danger  text-white"/>    
+        <div class="form-group">
+                <label for="item">order_return_date</label>
+                <input type="text" class="form-control" id="item" name="order_return_date" value="<%= item.order_return_date %>">
+            </div>         
+            
+            
+        <div class="form-group">
+                <label for="item">order_return_time</label>
+                <input type="text" class="form-control" id="item" name="order_return_time" value="<%= item.order_return_time %>">
+            </div>
+        <hr class="bg-danger  text-white"/> 
+        <div class="form-group">
+                <label for="item">order_address</label>
+                <input type="text" class="form-control" id="item" name="order_address" value="<%= item.order_address %>">
+            </div>
+
+
+        <div class="form-group">
+            <label for="item">order_content</label>
+            <textarea type="text" class="form-control" id="item" name="order_content" rows="5"><%= item.order_content %></textarea>
+        </div>
+
+        <div class="form-group">
+                <label for="item">order_total</label>
+                <input type="text" class="form-control" id="item" name="order_total" value="<%= item.order_total %>">
+            </div>
+
+
+
+
+
+
+
+
+       
+</div>
+
+<div class="col-sm-12">
+        <button type="submit" class="btn btn-primary">Update</button>
+</div>
+    
+</div><!-- row -->
+
+      
+
+
+
+
+        
+    
+    
+    
+</form>   
+</div>
+<% include ../partials/footer %>

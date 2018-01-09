@@ -1,0 +1,94 @@
+<% include ../partials/header_manager %>
+<div class="container">
+
+<form method="post" action="/manager_penel/orders/add/order"> 
+<div class="row">
+<div class="col-sm-8">
+    
+        <h1>add order</h1>
+        <div class="form-group">
+        <label for="item">order_products</label>
+        <select class="form-control" required name="order_products" id="order_products">
+                <option value="">select yours</option>
+                <% for(var i=0; i < itms_products.length; i++) { %>
+                <option  value="<%= itms_products[i]._id %>"  data-price="<%= itms_products[i].product_price %>" >
+                  <%= itms_products[i].product_name %> - $<%= itms_products[i].product_price %></option>
+                <% } %>
+        </select>
+        </div>      
+
+        <div class="form-group">
+            <label for="item">order_title</label>
+            <input type="text" class="form-control" id="item" name="order_title" value="">
+        </div>
+
+        <div class="form-group">
+                <label for="item">order_phone</label>
+                <input type="text" class="form-control" id="item" name="order_phone" value="">
+            </div>
+            <hr class="bg-danger  text-white"/> 
+        <div class="form-group">
+                <label for="item">order_pickup_date</label>
+                <input type="text" class="form-control" id="item" name="order_pickup_date" value="">
+            </div>
+
+        <div class="form-group">
+                <label for="item">order_pickup_time</label>
+                <input type="text" class="form-control" id="item" name="order_pickup_time" value="">
+            </div>
+        <hr class="bg-danger  text-white"/>    
+        <div class="form-group">
+                <label for="item">order_return_date</label>
+                <input type="text" class="form-control" id="item" name="order_return_date" value="">
+            </div>         
+            
+            
+        <div class="form-group">
+                <label for="item">order_return_time</label>
+                <input type="text" class="form-control" id="item" name="order_return_time" value="">
+            </div>
+        <hr class="bg-danger  text-white"/> 
+        <div class="form-group">
+                <label for="item">order_address</label>
+                <input type="text" class="form-control" id="item" name="order_address" value="">
+            </div>
+
+
+        <div class="form-group">
+            <label for="item">order_content</label>
+            <textarea type="text" class="form-control" id="item" name="order_content" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+                <label for="item">order_total</label>
+                <input type="text" class="form-control" id="item" name="order_total" value="">
+            </div>
+
+
+
+
+
+
+
+
+       
+</div>
+
+<div class="col-sm-12">
+        <button type="submit" class="btn btn-primary">add</button>
+</div>
+    
+</div><!-- row -->
+
+      
+
+
+
+
+        
+    
+    
+    
+</form>   
+</div>
+<% include ../partials/footer %>

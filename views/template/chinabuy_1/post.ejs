@@ -1,0 +1,26 @@
+<% include ./partials/header %>
+<div class="container">
+<ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/category">cat</a></li>
+        <li class="breadcrumb-item active"><%= (typeof itms.post_term_id === "undefined")?'':itms.post_term_id.term_name %></li>
+</ol>
+    <h1><%= itms.post_title %></h1>
+    <%= itms.post_content %>
+
+<br>
+ <% if(itms_img){ %>
+                    
+                        <% for(var i=0; i < itms_img.length; i++) { %>
+                <a href="<%= itms_img[i].media_destination.replace("./public", "") %>/<%= itms_img[i].media_filename %>" target="_blank">
+              <img src="<%= itms_img[i].media_destination.replace("./public", "") %>/<%= itms_img[i].media_filename %>" height="100" width="100"/>
+              <p>xxxx</p>
+              </a>
+                        <% }%>
+                    
+                <%  }else{%> <a href="/admin/media/add" class="btn btn-secondary">plz add album</a> <%}%>
+
+
+</div>
+  
+<% include ./partials/footer %>

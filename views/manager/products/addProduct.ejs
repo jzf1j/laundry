@@ -1,0 +1,22 @@
+<% include ../partials/header_manager %>
+<div class="container">
+
+        <h1>Add product</h1>
+        <form method="post" action="/manager_penel/products/add/product">
+          <div class="form-group">
+            <label for="item">product_name</label>
+            <input type="text" class="form-control" id="item" name="product_name">
+            <label for="item">product_price</label>
+            <input type="text" class="form-control" id="item" name="product_price">
+            <label for="item">product_quantity</label>
+            <input type="number" class="form-control" id="item" name="product_quantity">
+            <label for="item">product_description</label>
+            <textarea type="text" class="form-control" id="item" name="product_description" rows="5"></textarea>
+          </div>
+          <button type="submit" class="btn btn-default">Add</button>
+        </form>
+
+
+
+</div>
+<% include ../partials/footer %>

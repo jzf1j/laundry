@@ -1,0 +1,36 @@
+<% include ../partials/header_manager %>
+
+    <div class="container">
+      <h1>posts list</h1>
+      <a href="/manager_penel/orders/add" class="btn btn-default">add new order</a>
+      <p>post type:  <a href="/admin/posts/" class="btn btn-default">post</a> 
+                      <a href="/admin/posts/type/media_album" class="btn btn-default">album</a></p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td><b>phone</b></td>
+            <td><b>customer</b></td>
+            <td><b>pickup time</b></td>
+            <td><b>dropoff time</b></td>
+            <td><b>products</b></td>
+            <td colspan="2"><b>Action</b></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < order.length; i++) { %>
+          <tr>
+            <td><a href="/posts/post/<%= order[i]._id %>" target="_blank"><%= order[i].order_phone %></a></td>
+            <td><%= order[i].order_author_id.displayName %><br> <%= order[i].order_address %></td>
+            <td><%= order[i].order_pickup_date %> <br> <%= order[i].order_pickup_time %></td>
+            <td><%= order[i].order_return_date %> <br> <%= order[i].order_return_time %></td>
+            <td><%= order[i].order_products[0].product_name %> - $ <%= order[i].order_products[0].product_price %></td>
+            
+            <td><a href="/manager_penel/orders/edit/<%= order[i]._id %>" class="btn btn-primary">Edit</a></td>
+            <td><a href="/manager_penel/orders/delete/<%= order[i]._id %>" class="btn btn-danger">Delete</a></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+<% include ../partials/footer %>

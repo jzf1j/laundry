@@ -1,0 +1,25 @@
+
+<% include ../partials/header_logined %>
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="user">
+          <h1 class="text-center login-title">Welcome <%= user.username%> . Check your details below:
+            <div class="signup-wall">
+              <ul class="user-details">
+                <li>User email --->  <%=user.username %></li>
+                <li>display Name --->  <%= user.displayName %></li>
+              </ul>
+            </div><a href="/log_in/signout" class="text-center new-account">Sign Out</a>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <% include ../partials/footer %>

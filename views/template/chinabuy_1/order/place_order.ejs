@@ -1,0 +1,173 @@
+<% include ../partials/header_logined %>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/lib/timepicker/jquery.timepicker.min.css">
+
+<style>
+    .ui-timepicker-wrapper {
+      width: 10em;
+    }
+</style>
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+          <h2 class="text-center login-title">Welcome, you are starting place order</h2>
+          <ul class="user-details">
+              <li>customer email --->  <%=user.username %></li>
+              <li>customer Name --->  <%= user.displayName %></li>
+            </ul>
+            <br><br>
+            <form class="form" action="/order/add_order" method="post">
+              <div class="form-group">
+                <label for="order_products">select your laundry Weight:</label>
+                <select required name="order_products" id="order_products"  class="form-control">
+                    <% for(var i=0; i < itms_products.length; i++) { %>
+                    <option  value="<%= itms_products[i]._id %>"  data-price="<%= itms_products[i].product_price %>" >
+                      <%= itms_products[i].product_name %> - $<%= itms_products[i].product_price %></option>
+                    <% } %>
+                  </select>
+            </div>
+
+            
+            <div class="form-group">
+              <label for="phone" class="">Address for pickup and return </label>
+                <input type="text" class="form-control" id="order_address"   name="order_address" required placeholder="only Flushing or Whitestone">
+               
+          </div>
+
+          <div class="form-group"> 
+              <label for="phone">Phone number:</label>
+              <input type="tel" class="form-control" id="phone" maxlength="11" name="order_phone" required>
+          </div>
+              <h5>pick up:</h5>
+              <!-- <p>12 AM denotes midnight and 12 PM denotes noon</p> -->
+              <div class="form-inline">
+                  
+                <label for="pick_up_date">pick up date:</label>
+                <input type="text" class="form-control" id="pick_up_date" name="order_pickup_date" required>
+                <label for="pick_up_time">pick up time:</label>
+                <input type="text" class="form-control" id="pick_up_time" name="order_pickup_time" required>
+              </div>
+              <br>
+              <h5>return:</h5>
+              <div class="form-inline">
+                  
+                  <label for="pick_up_date">return date:</label>
+                  <input type="text" class="form-control" id="return_date" name="order_return_date" required>
+                  <label for="return_time">return time:</label>
+                  <input type="text" class="form-control" id="return_time" name="order_return_time" required>
+                </div>
+             
+              <br>
+              
+                <label for="comment">extra requirement:</label>
+              <textarea  class="form-control" id="comment" rows="5" name="order_content"></textarea>
+                
+
+              <div class="form-check"><br>
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" required> my cloth is able safely washed in machine
+                </label>
+                </div><br>
+                <div class="form-check">  
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" required>8.875% will charge if you pay by credit card
+                  </label>
+              </div>
+              <br>
+              <p><big>estimated price: <strong id="total"> ---- </strong> </big> <br> ( pick-up,drop-off,tips included)</p>
+              <input type="hidden" name="order_total" id="order_total" value="0">
+              <button type="submit" class="btn btn-primary">Submit order</button>
+            </form>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  
+
+  <% include ../partials/footer %>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="/lib/timepicker/jquery.timepicker.min.js"></script>
+  <script>
+
+$(document).ready(function(){
+  $("#pick_up_date").datepicker({
+      minDate: 0,
+      maxDate: "+10D",
+      numberOfMonths: 1,
+      onSelect: function(selected) {
+        $("#return_date").datepicker("option","minDate", selected);
+        var date = $('#pick_up_date').datepicker('getDate');
+        date.setTime(date.getTime() + (1000*60*60*24*1));
+        $('#return_date').datepicker('option', 'maxDate', date);
+      }
+  });
+  $("#return_date").datepicker({ 
+      minDate: 0,
+       maxDate: "+10D",
+      numberOfMonths: 1
+  });  
+  // 
+ 
+ 
+  $('#pick_up_time').timepicker({
+    minTime:DisplayDelayTime(),
+    maxTime:'8:00pm',
+    'disableTimeRanges': [
+        ['1am', '5:59am'],
+        ['8:01pm', '11:59pm'],
+        ['12am', '12:59am']
+    ]
+    
+  });
+  $('#return_time').timepicker({
+      minTime:'6:00am',
+      maxTime:'8:00pm',
+      'disableTimeRanges': [
+        ['1am', '5:59am'],
+        ['8:01pm', '11:59pm'],
+        ['12am', '12:59am']
+    ]
+    });
+  $("#return_time").focus(function () {
+    var date2=$('#pick_up_time').timepicker('getTime', new Date());
+    date2.setTime(date2.getTime() + (1000*60*60*5*1));
+    if($('#pick_up_date').datepicker().val() == $('#return_date').datepicker().val()){
+      $('#return_time').timepicker('option','minTime',date2);
+    }else{
+      $('#return_time').timepicker('option','minTime','6:00am');
+    }
+  });
+  $('#order_products').change(function() {
+    $('#total').text( '$'+$('#order_products').find(':selected').data("price") );
+    $('#order_total').val($('#order_products').find(':selected').data("price") );
+  });
+
+
+
+  
+});
+function DisplayDelayTime() {
+        var date = new Date();
+        date.setTime(date.getTime() + (1000*60*60*2*1));
+        var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+        var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+        hours = hours < 10 ? "0" + hours : hours;
+        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        // var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        return time = hours + ":" + minutes  + am_pm;
+    }; 
+      </script>

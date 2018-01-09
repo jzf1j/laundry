@@ -1,0 +1,26 @@
+<% include ./partials/header %>
+<div class="container">
+    <h1>category page</h1>
+
+
+
+    <h2>category:</h2>
+    <% for(var i=0; i < itms.length; i++) { %>
+        <p>----<%= itms[i].term_name %> <%= itms[i].term_slug %> <%= itms[i].term_discription %>----</p>
+        <% } %>
+
+    <h2>posts:</h2>
+
+    <% for(var i=0; i < itms_post.length; i++) { %>
+        <p><a href="/posts/post/<%= itms_post[i].post_title %>">
+        ----<%= itms_post[i].post_title %> <%= itms_post[i].post_slug %> <%= itms_post[i].post_discription %>----</a></p>
+        <% } %>
+
+
+
+
+
+
+
+</div>
+<% include ./partials/footer %>

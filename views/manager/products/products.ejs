@@ -1,0 +1,32 @@
+<% include ../partials/header_manager %>
+
+    <div class="container">
+      <h1>product list</h1>
+      <a href="/manager_penel/products/add" class="btn btn-default">add new product</a>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td><b>Item Name</b></td>
+            <td><b>product_price</b></td>
+            <td><b>product_description</b></td>
+            <td><b>product_quantity</b></td>
+            <td colspan="2"><b>Action</b></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < itms.length; i++) { %>
+          <tr>
+            <td><%= itms[i].product_name %></td>
+            <td>$<%= itms[i].product_price %></td>
+            <td><%= itms[i].product_description %></td>
+            <td><%= itms[i].product_quantity %></td>
+            
+            <td><a href="/manager_penel/products/edit/<%= itms[i]._id %>" class="btn btn-primary">Edit</a></td>
+            <td><a href="/manager_penel/products/delete/<%= itms[i]._id %>" class="btn btn-danger">Delete</a></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+  <% include ../partials/footer %>

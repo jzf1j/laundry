@@ -12,7 +12,18 @@ function fj_is_login  (req, res, next) {
 }
 module.exports = function(site){
     site.get('/',(req,res)=>{
-        res.render(config.template+'/index');
+        if (req.isAuthenticated()){
+            res.render(config.template+'/index_loged');
+        }else{
+            res.render(config.template+'/index');
+        }
+            
+    });
+    site.get('/feedback',(req,res)=>{
+        
+        res.render(config.template+'/page/feedback');
+        
+            
     });
 
     var orderRoutes = require('./routes/orderRoutes');

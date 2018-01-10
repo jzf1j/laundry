@@ -12,7 +12,7 @@ mOrderRouter.route('/').get(function (req, res) {
   Orders.find().populate('order_author_id').populate('order_products.buy_product')
   .sort({order_pickup_date: 1,order_pickup_time: 1}).exec(function(err, result_order) {
       if(err){return console.log(err);}
-      console.log(result_order[0].order_products[0].buy_product);
+      //console.log(result_order[0].order_products[0].buy_product);
         res.render('manager/orders/orders', {order: result_order});
       
     });

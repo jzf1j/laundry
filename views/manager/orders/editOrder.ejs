@@ -13,14 +13,15 @@
         <h1>edit order</h1>
         <div class="form-group">
         <label for="item">order_products</label>
-        <select class="form-control" required name="order_products" id="order_products">
+        <select class="form-control" required name="order_products[buy_product]" id="order_products">
                 <option value="">select yours</option>
                 <% for(var i=0; i < itms_products.length; i++) { %>
                 <option  value="<%= itms_products[i]._id %>"  data-price="<%= itms_products[i].product_price %>" 
-                    <% if(itms_products[i]._id.equals(item.order_products[0]._id)) { %> selected="selected" <% } %>>
+                    <% if(itms_products[i]._id.equals(item.order_products[0].buy_product)) { %> selected="selected" <% } %>>
                   <%= itms_products[i].product_name %> - $<%= itms_products[i].product_price %></option>
                 <% } %>
         </select>
+        <input type="hidden" name="order_products[buy_price]" id="product_price_copy" value="<%= item.order_products[0].buy_price %>">
         </div>      
         <div class="form-group">
             <label for="item">order_status</label>

@@ -21,49 +21,49 @@
             <br><br>
             <form class="form" action="/order/add_order" method="post">
               <div class="form-group">
-                <label for="order_products">select your laundry Weight:</label>
-                <select required name="order_products" id="order_products"  class="form-control">
+                <label for="order_products"><b>Select your laundry Weight:</b></label>
+                <select required name="order_products[buy_product]" id="order_products"  class="form-control">
                     <% for(var i=0; i < itms_products.length; i++) { %>
                     <option  value="<%= itms_products[i]._id %>"  data-price="<%= itms_products[i].product_price %>" >
                       <%= itms_products[i].product_name %> - $<%= itms_products[i].product_price %></option>
                     <% } %>
                   </select>
             </div>
-
+            <input type="hidden" name="order_products[buy_price]" id="product_price_copy" value="10">
             
             <div class="form-group">
-              <label for="phone" class="">Address for pickup and return </label>
+              <label for="phone" class=""><b>Address for pickup and return: </b></label>
                 <input type="text" class="form-control" id="order_address"   name="order_address" required placeholder="only Flushing or Whitestone">
                
           </div>
 
           <div class="form-group"> 
-              <label for="phone">Phone number:</label>
+              <label for="phone"><b>Phone number:</b></label>
               <input type="tel" class="form-control" id="phone" maxlength="11" name="order_phone" required>
           </div>
-              <h5>pick up:</h5>
+              <label><b>Pick up:</b></label>
               <!-- <p>12 AM denotes midnight and 12 PM denotes noon</p> -->
               <div class="form-inline">
                   
-                <label for="pick_up_date">pick up date:</label>
-                <input type="text" class="form-control" id="pick_up_date" name="order_pickup_date" required>
-                <label for="pick_up_time">pick up time:</label>
-                <input type="text" class="form-control" id="pick_up_time" name="order_pickup_time" required>
+                <!-- <label for="pick_up_date">date:</label> -->
+                <input type="text" class="form-control" id="pick_up_date" name="order_pickup_date" required placeholder="pickup date">
+                <!-- <label for="pick_up_time">time:</label> -->
+                <input type="text" class="form-control" id="pick_up_time" name="order_pickup_time" required placeholder="pickup time">
               </div>
               <br>
-              <h5>return:</h5>
+              <label><b>Return:</b></label>
               <div class="form-inline">
                   
-                  <label for="pick_up_date">return date:</label>
-                  <input type="text" class="form-control" id="return_date" name="order_return_date" required>
-                  <label for="return_time">return time:</label>
-                  <input type="text" class="form-control" id="return_time" name="order_return_time" required>
+                  <!-- <label for="pick_up_date">date:</label> -->
+                  <input type="text" class="form-control" id="return_date" name="order_return_date" required  placeholder="return date">
+                  <!-- <label for="return_time">time:</label> -->
+                  <input type="text" class="form-control" id="return_time" name="order_return_time" required  placeholder="return time">
                 </div>
              
               <br>
               
-                <label for="comment">extra requirement:</label>
-              <textarea  class="form-control" id="comment" rows="5" name="order_content"></textarea>
+                <label for="comment">note:</label>
+              <textarea  class="form-control" id="comment" rows="3" name="order_content"></textarea>
                 
 
               <div class="form-check"><br>
@@ -77,8 +77,10 @@
                   </label>
               </div>
               <br>
-              <p><big>estimated price: <strong id="total"> ---- </strong> </big> <br> ( pick-up,drop-off,tips included)</p>
-              <input type="hidden" name="order_total" id="order_total" value="0">
+              <p><big>estimated price: <strong id="total"> $10 </strong> </big> <br> ( pick-up,drop-off,tips included)</p>
+              <input type="hidden" name="order_total" id="order_total" value="10">
+
+
               <button type="submit" class="btn btn-primary">Submit order</button>
             </form>
 
@@ -105,7 +107,7 @@
 
 $(document).ready(function(){
   $("#pick_up_date").datepicker({
-      minDate: 0,
+      minDate: todayOrTommorow() ,
       maxDate: "+10D",
       numberOfMonths: 1,
       onSelect: function(selected) {
@@ -116,15 +118,15 @@ $(document).ready(function(){
       }
   });
   $("#return_date").datepicker({ 
-      minDate: 0,
+      minDate: todayOrTommorow(),
        maxDate: "+10D",
       numberOfMonths: 1
   });  
   // 
  
- 
+//  console.log('starting time:',DelayTime());
   $('#pick_up_time').timepicker({
-    minTime:DisplayDelayTime(),
+    minTime:DelayTime(),
     maxTime:'8:00pm',
     'disableTimeRanges': [
         ['1am', '5:59am'],
@@ -154,20 +156,35 @@ $(document).ready(function(){
   $('#order_products').change(function() {
     $('#total').text( '$'+$('#order_products').find(':selected').data("price") );
     $('#order_total').val($('#order_products').find(':selected').data("price") );
+    $('#product_price_copy').val($('#order_products').find(':selected').data("price") );
+    
   });
 
 
 
   
 });
-function DisplayDelayTime() {
+function DelayTime() {
         var date = new Date();
         date.setTime(date.getTime() + (1000*60*60*2*1));
         var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
         var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+        if(am_pm == 'PM' && hours >8 && hours !=12) return '6:00am';
         hours = hours < 10 ? "0" + hours : hours;
         var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
         // var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
         return time = hours + ":" + minutes  + am_pm;
     }; 
+function todayOrTommorow() {
+    var date = new Date();
+    date.setTime(date.getTime() + (1000*60*60*2*1));
+    var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+    var am_pm = date.getHours() >= 12 ? "PM" : "AM";
+    if(am_pm == 'PM' && hours >8 && hours !=12) {
+      return 1;
+    }else{
+      return 0;
+    }
+   
+}; 
       </script>

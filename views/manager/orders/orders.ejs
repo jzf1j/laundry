@@ -17,13 +17,20 @@
           </tr>
         </thead>
         <tbody>
-          <% for(var i=0; i < order.length; i++) { %>
+          <% for(var i=0; i < order.length; i++) { 
+            var product_name='';
+            var product_price='';
+            if(order[i].order_products !== null && order[i].order_products.length >0){
+              product_name=order[i].order_products[0].buy_product.product_name;
+              product_price=order[i].order_products[0].buy_price;
+            }
+            %>
           <tr>
-            <td><a href="/posts/post/<%= order[i]._id %>" target="_blank"><%= order[i].order_phone %></a></td>
+            <td><%= order[i].order_phone %><br><%= order[i].order_status %> </a></td>
             <td><%= order[i].order_author_id.displayName %><br> <%= order[i].order_address %></td>
             <td><%= order[i].order_pickup_date %> <br> <%= order[i].order_pickup_time %></td>
             <td><%= order[i].order_return_date %> <br> <%= order[i].order_return_time %></td>
-            <td><%= order[i].order_products[0].product_name %> - $ <%= order[i].order_products[0].product_price %></td>
+            <td><%= product_name %> - $ <%= product_price %><br> <%= order[i].order_content %></td>
             
             <td><a href="/manager_penel/orders/edit/<%= order[i]._id %>" class="btn btn-primary">Edit</a></td>
             <td><a href="/manager_penel/orders/delete/<%= order[i]._id %>" class="btn btn-danger">Delete</a></td>

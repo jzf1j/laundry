@@ -6,7 +6,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1 class="text-center login-title">Registration （用户注册）
+      <h1 class="text-center login-title">Registration （用户注册）</h1>
           <div class="text-danger"><%= message %></div>
         <div class="signup-wall">
           <form action="/login/signup" method="POST" class="form-signin">
@@ -14,12 +14,12 @@
             <br><input type="password" name="password" placeholder="Password 密码" required="required" class="form-control nomargin"/>
             <!-- <br><input type="email" name="email" placeholder="Email 电子邮件" required="required" class="form-control"/> -->
             <br><input type="text" name="displayName" placeholder="Name 名字" required="required" class="form-control"/>
-            <br><button type="submit" class="btn btn-lg btn-primary btn-block">Register（提交注册）</button><span class="clearfix"></span>
+            <br><button type="submit" class="btn btn-lg btn-primary">Register（提交注册）</button><span class="clearfix"></span>
           </form>
         </div>
         <br>
-          <a href="/login" class="text-center new-account">log in</a>
-      </h1>
+          <a href="/login" class="text-center new-account btn btn-lg btn-secondary">log in (登陆)</a>
+      
     </div>
   </div>
 </div>

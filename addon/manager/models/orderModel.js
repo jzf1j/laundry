@@ -20,7 +20,11 @@ var orders = new Schema({
      order_weight_class: String,
      order_address: String,
      order_content: String,
-     order_products:[{ type: Schema.Types.ObjectId, ref: 'Products' }],
+     order_products:[{ 
+        buy_qty:      { type: Number, default: 1},
+        buy_price: String,
+        buy_product:  { type: Schema.Types.ObjectId, ref: 'Products' }
+    }],
      order_total: String
 },{
     collection: 'orders'

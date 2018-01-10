@@ -8,6 +8,38 @@
       <div class="col-sm-12">
         
         <h1>history</h1>
+        <p>please call 707-293-7762 if you have any question</p>
+        <% for(var i=0; i < order.length; i++) { %>
+          
+          <h4>order <%= i+1 %> detail:</h4>
+          <ul class="user-details">
+            <li>order date --->  <%= order[i].order_date.toDateString() %></li>
+            <li>order status --->  <%= order[i].order_status %></li>
+            <li>order phone --->  <%= order[i].order_phone %></li><br>
+
+              
+              
+              
+              
+              <li>pickup date --->  <%= order[i].order_pickup_date %></li>
+              <li>pickup time --->  <%= order[i].order_pickup_time %></li>
+              <li>return date --->  <%= order[i].order_return_date %></li>
+              <li>return time --->  <%= order[i].order_return_time %></li>
+              <li>service --->  <%= order[i].order_products[0].buy_price %></li>
+              <li>customer note --->  <%= order[i].order_content %></li>
+
+             
+
+
+              <li>order estimated total --->  $<%= order[i].order_total %></li>
+              
+            </ul>
+
+            <hr>
+          <% } %>
+
+
+
       </div>
     </div>
   </div>

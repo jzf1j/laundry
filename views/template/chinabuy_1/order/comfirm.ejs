@@ -5,13 +5,14 @@
 <div class="container">
     <div class="row">
       <div class="col-sm-12">
-          <h2 class="text-center login-title">thanks, your launtrary is been comfirm</h2>
+          <h2 class="text-center login-title">thanks, your laundry is been comfirm</h2>
           <p>please call 707-293-7762 if you have any question</p>
+          <p>you will also get comfirm email -<%=user.username %></p>
           <h4>order detail:</h4>
           <ul class="user-details">
               <li>customer email --->  <%=user.username %></li>
               <li>customer Name --->  <%= user.displayName %></li>
-              <li>customer Name --->  <%= order.order_phone %></li><br>
+              <li>customer phone --->  <%= order.order_phone %></li><br>
 
               <li>order date --->  <%= order.order_date.toDateString() %></li>
               <li>order title --->  <%= order.order_title %></li>
@@ -21,11 +22,10 @@
               <li>pickup time --->  <%= order.order_pickup_time %></li>
               <li>return date --->  <%= order.order_return_date %></li>
               <li>return time --->  <%= order.order_return_time %></li>
-              <li>weight --->  <%= order.order_products %></li>
               <li>customer note --->  <%= order.order_content %></li><br>
 
 
-              <li><b>order estimated total --->  <%= order.order_total %></b></li>
+              <li><b>order estimated total ---> $ <%= order.order_total %></b></li>
               
             </ul>
 

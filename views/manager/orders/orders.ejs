@@ -27,7 +27,7 @@
             %>
           <tr>
             <td><%= order[i].order_phone %><br><%= order[i].order_status %> </a></td>
-            <td><%= order[i].order_author_id.displayName %><br> <%= order[i].order_address %></td>
+            <td><%= order[i].order_author_id %><br> <%= order[i].order_address %></td>
             <td><%= order[i].order_pickup_date %> <br> <%= order[i].order_pickup_time %></td>
             <td><%= order[i].order_return_date %> <br> <%= order[i].order_return_time %></td>
             <td><%= product_name %> - $ <%= product_price %><br> <%= order[i].order_content %></td>

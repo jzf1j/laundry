@@ -16,7 +16,7 @@ module.exports = function (site){
     var managerRoutes = require('./routes/managerRoutes');
     site.use('/manager_login', managerRoutes);
 
-    //site.use('/manager_penel',fj_auth);//put this before other 
+    site.use('/manager_penel',fj_auth);//put this before other 
 
     var productRoutes = require('./routes/productRoutes');
     site.use('/manager_penel/products', productRoutes);

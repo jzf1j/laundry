@@ -13,9 +13,9 @@ function fj_is_login  (req, res, next) {
 module.exports = function(site){
     site.get('/',(req,res)=>{
         if (req.isAuthenticated()){
-            res.render(config.template+'/index_loged');
+            res.render(config.template+'/index_loged',{setting:config});
         }else{
-            res.render(config.template+'/index');
+            res.render(config.template+'/index',{setting:config});
         }
             
     });
